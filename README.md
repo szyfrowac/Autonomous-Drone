@@ -1,21 +1,24 @@
-Real-Time MAVLink GPS Tracker
+# Real-Time MAVLink GPS Tracker
+
 This project provides a simple yet powerful ground station system to visualize a drone's GPS position on a map in real-time. It's designed to work seamlessly with PX4 SITL (Software-In-The-Loop) for testing and can be easily adapted for real hardware.
 
 The system consists of three main components:
 
-Python Backend (gcs_server.py): A Flask server that connects to a MAVLink source, parses GLOBAL_POSITION_INT messages, and relays the data via WebSockets.
+1. Python Backend (gcs_server.py): A Flask server that connects to a MAVLink source, parses GLOBAL_POSITION_INT messages, and relays the data via WebSockets.
 
-HTML Frontend (index.html): A single-page web application that uses Leaflet.js to render a map and plots the drone's position and flight path.
+2. HTML Frontend (index.html): A single-page web application that uses Leaflet.js to render a map and plots the drone's position and flight path.
 
-Python Mission Generator (mission_generator.py): A script to create a pre-planned flight mission file and automatically upload it to the simulator.
+3. Python Mission Generator (mission_generator.py): A script to create a pre-planned flight mission file and automatically upload it to the simulator.
 
-How to Use
+# How to Use
 1. Prerequisites
 First, ensure you have Python and the necessary libraries installed.
 
 # Make sure you have Python 3 installed
 # Install required Python packages
+```
 pip install pymavlink Flask flask-socketio
+```
 
 You will also need to have the PX4 Autopilot repository cloned to run the SITL simulation. If you don't have it, clone it from the official repository:
 
