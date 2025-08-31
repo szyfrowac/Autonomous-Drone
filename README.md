@@ -48,8 +48,7 @@ python gcs_server.py
 ```
 You should see logs like:
 ```
-MAVLink Heartbeat received! Connection established. once PX4 is broadcasting.
-```
+MAVLink Heartbeat received! Connection established.
 
 Step 2: Start PX4 SITL Simulation
 ```bash
