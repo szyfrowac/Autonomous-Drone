@@ -69,6 +69,7 @@ http://127.0.0.1:5000
 Once GPS lock is established, you’ll see the drone’s live position on the map.
 
 3. Creating & Running a Mission
+
 Step 1: Generate & Upload Mission
 ```bash
 
