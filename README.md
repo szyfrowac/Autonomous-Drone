@@ -31,53 +31,62 @@ Ensure you have **Python 3** and the required packages installed:
 ```bash
 # Install required Python packages
 pip install pymavlink Flask flask-socketio
+```
 Clone the PX4 Autopilot repository for SITL:
 
-bash
-Copy code
+```bash
+
 git clone https://github.com/PX4/PX4-Autopilot.git --recursive
 cd PX4-Autopilot
+```
 2. Running the System
 Step 1: Start the Ground Station Backend
-bash
-Copy code
+```bash
+
 # In project directory
 python gcs_server.py
+```
 You should see logs like:
+```
 MAVLink Heartbeat received! Connection established. once PX4 is broadcasting.
+```
 
 Step 2: Start PX4 SITL Simulation
-bash
-Copy code
+```bash
+
 # Inside PX4-Autopilot directory
 make px4_sitl jmavsim
+```
 PX4 will broadcast MAVLink on udp:127.0.0.1:14550.
 The backend will automatically connect.
 
 Step 3: Open the Ground Station Map
 Open your browser and visit:
 
-cpp
-Copy code
+```bash
+
 http://127.0.0.1:5000
+```
 Once GPS lock is established, you’ll see the drone’s live position on the map.
 
 3. Creating & Running a Mission
 Step 1: Generate & Upload Mission
-bash
-Copy code
+```bash
+
 # In project directory
 python mission_generator.py --upload
+```
 This creates mission.txt and uploads it to SITL.
 You should see: Mission upload successful!.
 
 Step 2: Start Mission in SITL
 In the PX4 SITL console (pxh>), run:
 
-bash
-Copy code
+```bash
+
 commander mode auto:mission
 commander arm
+```
 The drone will:
 ✅ Arm
 ✅ Takeoff
