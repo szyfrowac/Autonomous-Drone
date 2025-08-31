@@ -81,16 +81,8 @@ Go back to the PX4 SITL terminal (the one with the pxh> prompt) and type the fol
 
 ```
 # In the PX4 SITL console (pxh>)
-mission start
+commander mode auto:mission
+commander arm
 ```
 
 The drone will now arm, take off, and fly the square pattern. You can watch its progress in real-time on your ground station map!
-
-(Optional) Manual Mission Loading:
-If you prefer to load the mission manually, you can still run python mission_generator.py (without --upload) to generate the mission.txt file. Then, use the following command in the SITL console, providing the full path to the file:
-
-```
-# In the PX4 SITL console (pxh>)
-mission load /path/to/your/project/mission.txt
-mission start
-```
