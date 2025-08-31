@@ -11,7 +11,7 @@ from pymavlink import mavutil
 # --- Configuration ---
 # MAVLink connection string
 # For SITL (Software in the Loop) simulation:
-MAVLINK_CONNECTION_STRING = 'udp:127.0.0.1:14550'
+MAVLINK_CONNECTION_STRING = 'udp:127.0.0.1:14551'
 # For a real telemetry radio via USB:
 # MAVLINK_CONNECTION_STRING = '/dev/ttyUSB0' # Linux/Mac
 # MAVLINK_CONNECTION_STRING = 'COM3' # Windows (replace COM3 with your port)
@@ -122,4 +122,3 @@ if __name__ == '__main__':
     print("Starting Flask-SocketIO server at http://127.0.0.1:5000")
     # Use allow_unsafe_werkzeug=True for newer versions of Werkzeug
     socketio.run(app, host='0.0.0.0', port=5000, debug=False, allow_unsafe_werkzeug=True)
-
