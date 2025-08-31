@@ -39,7 +39,7 @@ Clone the PX4 Autopilot repository for SITL:
 git clone https://github.com/PX4/PX4-Autopilot.git --recursive
 cd PX4-Autopilot
 ```
-2. Running the System
+### 2. Running the System
 Step 1: Start the Ground Station Backend
 ```bash
 
@@ -68,7 +68,7 @@ http://127.0.0.1:5000
 ```
 Once GPS lock is established, you’ll see the drone’s live position on the map.
 
-3. Creating & Running a Mission
+### 3. Creating & Running a Mission
 
 Step 1: Generate & Upload Mission
 ```bash
