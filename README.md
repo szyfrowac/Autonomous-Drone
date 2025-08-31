@@ -1,88 +1,86 @@
-# Real-Time MAVLink GPS Tracker
+# 🚁 Real-Time MAVLink GPS Tracker
 
-This project provides a simple yet powerful ground station system to visualize a drone's GPS position on a map in real-time. It's designed to work seamlessly with PX4 SITL (Software-In-The-Loop) for testing and can be easily adapted for real hardware.
+This project provides a **simple yet powerful ground station system** to visualize a drone's GPS position on a map in **real-time**.  
+It works seamlessly with **PX4 SITL (Software-In-The-Loop)** for testing and can be easily adapted for **real hardware**.
 
-The system consists of three main components:
+---
 
-1. Python Backend (gcs_server.py): A Flask server that connects to a MAVLink source, parses GLOBAL_POSITION_INT messages, and relays the data via WebSockets.
+## 📦 System Components
 
-2. HTML Frontend (index.html): A single-page web application that uses Leaflet.js to render a map and plots the drone's position and flight path.
+1. **Python Backend (`gcs_server.py`)**  
+   - Flask server that connects to a MAVLink source.  
+   - Parses `GLOBAL_POSITION_INT` messages.  
+   - Relays GPS data via **WebSockets**.
 
-3. Python Mission Generator (mission_generator.py): A script to create a pre-planned flight mission file and automatically upload it to the simulator.
+2. **HTML Frontend (`index.html`)**  
+   - Single-page web app using **Leaflet.js**.  
+   - Renders a live map with drone position and flight path.
 
-# How to Use
-1. Prerequisites
-First, ensure you have Python and the necessary libraries installed.
+3. **Mission Generator (`mission_generator.py`)**  
+   - Python script to create a pre-planned mission file.  
+   - Automatically uploads it to SITL for autonomous flight.
 
-```
-# Make sure you have Python 3 installed
+---
+
+## ⚙️ How to Use
+
+### 1. Prerequisites
+
+Ensure you have **Python 3** and the required packages installed:
+
+```bash
 # Install required Python packages
-
 pip install pymavlink Flask flask-socketio
-```
+Clone the PX4 Autopilot repository for SITL:
 
-You will also need to have the PX4 Autopilot repository cloned to run the SITL simulation. If you don't have it, clone it from the official repository:
-
-```
-git clone [https://github.com/PX4/Autopilot.git](https://github.com/PX4/Autopilot.git) --recursive
-cd Autopilot
-```
-
+bash
+Copy code
+git clone https://github.com/PX4/PX4-Autopilot.git --recursive
+cd PX4-Autopilot
 2. Running the System
-Follow these steps in order:
-
 Step 1: Start the Ground Station Backend
-
-Open a terminal, navigate to the directory where you saved the project files, and run the Python script:
-
-```
+bash
+Copy code
+# In project directory
 python gcs_server.py
-```
+You should see logs like:
+MAVLink Heartbeat received! Connection established. once PX4 is broadcasting.
 
-You should see output indicating that the server is running and attempting to connect to MAVLink.
-
-Step 2: Start the PX4 SITL Simulation
-
-Open a new, separate terminal, navigate to your Autopilot directory, and start the simulation.
-
-```
-# Make sure you are in the PX4-Autopilot directory
+Step 2: Start PX4 SITL Simulation
+bash
+Copy code
+# Inside PX4-Autopilot directory
 make px4_sitl jmavsim
-```
+PX4 will broadcast MAVLink on udp:127.0.0.1:14550.
+The backend will automatically connect.
 
-Once the simulation is running, it will automatically start broadcasting MAVLink data on udp:127.0.0.1:14550. The backend terminal should now show "MAVLink Heartbeat received! Connection established."
+Step 3: Open the Ground Station Map
+Open your browser and visit:
 
-Step 3: View the Map in Your Browser
-
-Open your web browser (Chrome, Firefox, etc.) and navigate to:
-
-```
+cpp
+Copy code
 http://127.0.0.1:5000
-```
+Once GPS lock is established, you’ll see the drone’s live position on the map.
 
-The webpage will load, and as soon as the simulator gets a GPS lock, you will see the drone's position appear on the map.
-
-3. Creating and Running a Mission
-You can now generate and upload a mission file to have the simulated drone fly autonomously.
-
-Step 1: Generate and Upload the Mission
-
-Open a third terminal, navigate to your project directory, and run the mission generator script with the --upload flag:
-
-```
+3. Creating & Running a Mission
+Step 1: Generate & Upload Mission
+bash
+Copy code
+# In project directory
 python mission_generator.py --upload
-```
+This creates mission.txt and uploads it to SITL.
+You should see: Mission upload successful!.
 
-This will create a file named mission.txt and then immediately try to upload this mission to the running SITL instance. You should see "Mission upload successful!" in the terminal.
+Step 2: Start Mission in SITL
+In the PX4 SITL console (pxh>), run:
 
-Step 2: Start the Mission in SITL
-
-Go back to the PX4 SITL terminal (the one with the pxh> prompt) and type the following command to start the mission you just uploaded:
-
-```
-# In the PX4 SITL console (pxh>)
+bash
+Copy code
 commander mode auto:mission
 commander arm
-```
+The drone will:
+✅ Arm
+✅ Takeoff
+✅ Fly the square mission pattern
 
-The drone will now arm, take off, and fly the square pattern. You can watch its progress in real-time on your ground station map!
+You can watch it in real-time on the ground station map.
